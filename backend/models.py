@@ -20,6 +20,7 @@ class Events(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(30))
+    created_by: Mapped[str] = mapped_column(String(50))
     description: Mapped[Optional[str]]
     
     start_datetime: Mapped[datetime.datetime] = mapped_column(DateTime)
@@ -28,8 +29,8 @@ class Events(Base):
     location: Mapped[str] = mapped_column(String(30))
     rsvp_description: Mapped[Optional[str]]
 
-    def __repr__(self) -> str:
-        return f"Events(id={self.id!r}, title={self.title!r}, start_datetime={self.start_datetime!r}, end_datetime={self.end_datetime!r}, location={self.location!r})"
+    def __repr__(self) -> str: # for debugging
+        return f"Events(id={self.id!r}, title={self.title!r}, created_by ={self.created_by!r}, start_datetime={self.start_datetime!r}, end_datetime={self.end_datetime!r}, location={self.location!r})"
     
 class Rsvps(Base):
     '''
@@ -40,5 +41,8 @@ class Rsvps(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     event_id: Mapped[int] = mapped_column(ForeignKey("events.id"))
     name: Mapped[str] = mapped_column(String(30))
-    email: Mapped[str] = mapped_column(String)
+    email: Mapped[str] = mapped_column(String(50))
 
+    def __repr__(self) -> str: # for debugging
+        return f"Rsvps(id={self.id!r}, event_id={self.event_id!r}, name={self.name!r}, email={self.email!r})"
+    
