@@ -1,0 +1,44 @@
+# defines what my tables will look like
+from typing import List
+from typing import Optional
+from sqlalchemy import ForeignKey
+from sqlalchemy import String, DateTime
+from sqlalchemy.orm import DeclarativeBase
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
+from sqlalchemy.orm import relationship
+import datetime
+
+class Base(DeclarativeBase):
+    pass
+
+class Events(Base):
+    '''
+    The table for the information on the different events created
+    '''
+    __tablename__ = "events"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    title: Mapped[str] = mapped_column(String(30))
+    description: Mapped[Optional[str]]
+    
+    start_datetime: Mapped[datetime.datetime] = mapped_column(DateTime)
+    end_datetime: Mapped[datetime.datetime] = mapped_column(DateTime)
+
+    location: Mapped[str] = mapped_column(String(30))
+    rsvp_description: Mapped[Optional[str]]
+
+    def __repr__(self) -> str:
+        return f"Events(id={self.id!r}, title={self.title!r}, start_datetime={self.start_datetime!r}, end_datetime={self.end_datetime!r}, location={self.location!r})"
+    
+class Rsvps(Base):
+    '''
+    The table for the information on the rsvps made for the event
+    '''
+    __tablename__ = "rsvps"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    event_id: Mapped[int] = mapped_column(ForeignKey("events.id"))
+    name: Mapped[str] = mapped_column(String(30))
+    email: Mapped[str] = mapped_column(String)
+
