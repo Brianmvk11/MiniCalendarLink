@@ -9,16 +9,16 @@ ORM: SQLAlchemy (works great with FastAPI)
 
 
 ## How to run backend
-1. Active the uv virtual environment:
-Windows
+1. create and activate the uv virtual environment:
 ```
-calendarlinkvenv\Scripts\activate
-```
-Linux
-```
-source calendarlinkvenv/Scripts/activate
+uv venv my-name
+source normalvenv/Scripts/activate
 ```
 
+Install dependacies
+```
+uv pip install -r requirements.txt
+```
 
 To run the Fastapi backend
 ```
