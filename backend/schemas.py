@@ -5,7 +5,7 @@ from typing import Optional
 # Shared properties for Event
 class EventBase(BaseModel):
     title: str
-    created_by: str
+    # created_by: str
     description: Optional[str] = None
     start_datetime: datetime
     end_datetime: datetime

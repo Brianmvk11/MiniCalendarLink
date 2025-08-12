@@ -1,6 +1,7 @@
-from typing import Union
+from typing import List
 
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 # from pydantic import BaseModel
 
 from sqlalchemy.orm import Session
@@ -13,6 +14,20 @@ import schemas
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+# Allow React dev server to talk to FastAPI since running on different ports
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # where your frontend runs
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/events/", response_model=List[schemas.EventResponse])
+def get_events(db: Session = Depends(get_db)):
+    events = db.query(Events).all()
+    return events
 
 @app.post("/events/", response_model=schemas.EventResponse)
 def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
@@ -64,4 +79,9 @@ def create_rsvp(rsvp: schemas.RsvpCreate, db: Session = Depends(get_db)):
         f.write(email_content)
 
     return new_rsvp
+
+# @app.get("/events")
+# def get_events():
+#     return [{"id": 1, "title": "Test Event"}]
+
 

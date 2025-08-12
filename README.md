@@ -24,3 +24,9 @@ To run the Fastapi backend
 ```
 fastapi dev backend/main.py
 ```
+
+To run the frontend
+```
+cd frontend
+npm start
+```

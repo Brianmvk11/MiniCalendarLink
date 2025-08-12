@@ -20,7 +20,7 @@ class Events(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(30))
-    created_by: Mapped[str] = mapped_column(String(50))
+    # created_by: Mapped[str] = mapped_column(String(50))
     description: Mapped[Optional[str]]
     
     start_datetime: Mapped[datetime.datetime] = mapped_column(DateTime)
