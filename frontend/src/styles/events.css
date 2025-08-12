@@ -1,0 +1,85 @@
+/* Page container */
+.events-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #e0f2fe, #bfdbfe);
+  padding: 2rem;
+}
+
+/* Title */
+.events-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1d4ed8;
+  margin-bottom: 1.5rem;
+}
+
+/* Create button link */
+.create-event-link {
+  display: inline-block;
+  background-color: #2563eb;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  transition: background 0.2s ease;
+}
+
+.create-event-link:hover {
+  background-color: #1e40af;
+}
+
+/* Events grid */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Event card */
+.event-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #93c5fd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Event title */
+.event-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e3a8a;
+  margin-bottom: 0.3rem;
+}
+
+/* Event date */
+.event-date {
+  font-size: 0.95rem;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+}
+
+/* RSVP link */
+.rsvp-link {
+  display: inline-block;
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.rsvp-link:hover {
+  background-color: #1d4ed8;
+}

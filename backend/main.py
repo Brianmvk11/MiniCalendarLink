@@ -60,18 +60,40 @@ def create_rsvp(rsvp: schemas.RsvpCreate, db: Session = Depends(get_db)):
     # Simulate email HTML
     email_content = f"""
     <html>
-    <body>
-        <h2>Event Confirmation</h2>
-        <p>Hi {rsvp.name},</p>
-        <p>Thank you for RSVPing to <strong>{event.title}</strong>.</p>
-        <p><b>Date:</b> {event.start_datetime}</p>
-        <p><b>Location:</b> {event.location}</p>
-        <p>{event.description}</p>
-        <hr>
-        <p>We look forward to seeing you!</p>
+    <body style="font-family: Arial, sans-serif; background-color: #f0f8ff; margin: 0; padding: 20px;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <tr>
+            <td style="background-color: #2563eb; padding: 15px; text-align: center; color: white; font-size: 20px; font-weight: bold;">
+            Event Confirmation
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 20px; color: #333;">
+            <p style="font-size: 16px;">Hi {rsvp.name},</p>
+            <p style="font-size: 16px;">Thank you for RSVPing to <strong style="color: #2563eb;">{event.title}</strong>.</p>
+            
+            <p style="font-size: 15px; margin: 10px 0;">
+                <b>Date:</b> {event.start_datetime}<br>
+                <b>Location:</b> {event.location}
+            </p>
+            
+            <p style="font-size: 15px; color: #555;">{event.description}</p>
+            
+            <hr style="border: none; height: 1px; background-color: #ddd; margin: 20px 0;">
+            
+            <p style="font-size: 15px;">We look forward to seeing you!</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="background-color: #f3f4f6; padding: 10px; text-align: center; font-size: 13px; color: #777;">
+            © {event.title} | Event Management System
+            </td>
+        </tr>
+        </table>
     </body>
     </html>
     """
+
 
     # Save to file
     filename = f"emails/{rsvp.email.replace('@', '_at_')}_{event.id}.html"
