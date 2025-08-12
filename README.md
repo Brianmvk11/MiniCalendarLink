@@ -19,3 +19,8 @@ Linux
 source calendarlinkvenv/Scripts/activate
 ```
 
+
+To run the Fastapi backend
+```
+fastapi dev backend/main.py
+```
