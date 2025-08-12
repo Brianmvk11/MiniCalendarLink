@@ -16,8 +16,8 @@ export default function CreateEvent() {
     axios.post("http://127.0.0.1:8000/events", { 
       title, 
       description, 
-      start_datetime, 
-      end_datetime, 
+      start_datetime: new Date(start_datetime).toISOString(),
+      end_datetime: new Date(end_datetime).toISOString(), 
       location, 
       rsvp_description   
     })

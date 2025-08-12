@@ -8,7 +8,7 @@ export default function EventList() {
   
     useEffect(() => {
         axios.get("http://127.0.0.1:8000/events")
-        .then(res => setEvents(res.data))
+        .then(res => setEvents(res.data)) //saving to the events state
         .catch(err => console.error(err));
     }, []);
 
@@ -19,7 +19,7 @@ export default function EventList() {
       <ul>
         {events.map(event => (
           <li key={event.id}>
-            {event.title} - {event.date}
+            {event.title} - {new Date(event.start_datetime).toLocaleString()}
             <Link to={`/rsvp/${event.id}`}> RSVP </Link>
           </li>
         ))}

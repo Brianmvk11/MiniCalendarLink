@@ -3,14 +3,14 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function RSVP() {
-  const { eventId } = useParams();
+  const { event_id } = useParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   const handleRSVP = (e) => {
     e.preventDefault();
-    axios.post('http://127.0.0.1:8000/events/${eventId}/rsvp', { name, email })
+    axios.post(`http://127.0.0.1:8000/rsvp`, { event_id, name, email })
       .then(() => {
         alert("RSVP successful! Check the generated HTML file.");
         navigate("/");

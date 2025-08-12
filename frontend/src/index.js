@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Routes>
       <Route path="/" element={<EventList />} />
       <Route path="/create" element={<CreateEvent />} />
-      <Route path="/rsvp/:eventId" element={<RSVP />} />
+      <Route path="/rsvp/:event_id" element={<RSVP />} />
     </Routes>
   </BrowserRouter>
 );

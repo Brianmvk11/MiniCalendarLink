@@ -24,12 +24,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/events/", response_model=List[schemas.EventResponse])
+@app.get("/events", response_model=List[schemas.EventResponse])
 def get_events(db: Session = Depends(get_db)):
     events = db.query(Events).all()
     return events
 
-@app.post("/events/", response_model=schemas.EventResponse)
+@app.post("/events", response_model=schemas.EventResponse)
 def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
     new_event = Events(**event.model_dump())
 
@@ -38,7 +38,7 @@ def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
     db.refresh(new_event)
     return new_event
 
-@app.post("/rsvp/", response_model=schemas.RsvpResponse)
+@app.post("/rsvp", response_model=schemas.RsvpResponse)
 def create_rsvp(rsvp: schemas.RsvpCreate, db: Session = Depends(get_db)):
 
     # from models import Events, RSVP

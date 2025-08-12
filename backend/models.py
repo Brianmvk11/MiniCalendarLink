@@ -19,14 +19,14 @@ class Events(Base):
     __tablename__ = "events"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[str] = mapped_column(String(30))
+    title: Mapped[str] = mapped_column(String(100))
     # created_by: Mapped[str] = mapped_column(String(50))
     description: Mapped[Optional[str]]
     
     start_datetime: Mapped[datetime.datetime] = mapped_column(DateTime)
     end_datetime: Mapped[datetime.datetime] = mapped_column(DateTime)
 
-    location: Mapped[str] = mapped_column(String(30))
+    location: Mapped[str] = mapped_column(String(100))
     rsvp_description: Mapped[Optional[str]]
 
     def __repr__(self) -> str: # for debugging
