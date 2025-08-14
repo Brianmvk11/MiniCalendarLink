@@ -2,10 +2,10 @@
 Building a mini CalendarLink Website
 
 ## Tech Stack:
-Frontend: React
-Backend: Python FastAPI
-Database: SQLite (quick to set up, no server needed)
-ORM: SQLAlchemy (works great with FastAPI)
+Frontend: React <br />
+Backend: Python FastAPI <br />
+Database: SQLite (quick to set up, no server needed) <br />
+ORM: SQLAlchemy (works great with FastAPI) <br />
 
 
 ## How to run backend
