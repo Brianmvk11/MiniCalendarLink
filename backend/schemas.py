@@ -29,6 +29,7 @@ class RsvpBase(BaseModel):
     event_id: int
     name: str
     email: EmailStr
+    rsvp_status: str
 
 class RsvpCreate(RsvpBase):
     pass

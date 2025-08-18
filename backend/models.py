@@ -42,6 +42,7 @@ class Rsvps(Base):
     event_id: Mapped[int] = mapped_column(ForeignKey("events.id"))
     name: Mapped[str] = mapped_column(String(30))
     email: Mapped[str] = mapped_column(String(50))
+    rsvp_status: Mapped[str] = mapped_column(String) #Yes, Maybe, No
 
     def __repr__(self) -> str: # for debugging
         return f"Rsvps(id={self.id!r}, event_id={self.event_id!r}, name={self.name!r}, email={self.email!r})"

@@ -40,24 +40,25 @@ def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
 
 @app.post("/rsvp", response_model=schemas.RsvpResponse)
 def create_rsvp(rsvp: schemas.RsvpCreate, db: Session = Depends(get_db)):
-
-    # from models import Events, RSVP
-
-    #Get event 
     event = db.query(Events).filter(Events.id == rsvp.event_id).first()
     if not event:
         return {"error": "Event not found"}
-    
-    new_rsvp = Rsvps(**rsvp.model_dump())
 
+    new_rsvp = Rsvps(**rsvp.model_dump())
     db.add(new_rsvp)
     db.commit()
     db.refresh(new_rsvp)
 
-    # Create email folder if not exists
     os.makedirs("emails", exist_ok=True)
 
-    # Simulate email HTML
+    # Message depending on RSVP status
+    if rsvp.rsvp_status == "Yes":
+        message = "We look forward to seeing you!"
+    elif rsvp.rsvp_status == "Maybe":
+        message = "We hope you can make it!"
+    else:  # No
+        message = "Sorry you can't make it, maybe next time!"
+
     email_content = f"""
     <html>
     <body style="font-family: Arial, sans-serif; background-color: #f0f8ff; margin: 0; padding: 20px;">
@@ -70,7 +71,7 @@ def create_rsvp(rsvp: schemas.RsvpCreate, db: Session = Depends(get_db)):
         <tr>
             <td style="padding: 20px; color: #333;">
             <p style="font-size: 16px;">Hi {rsvp.name},</p>
-            <p style="font-size: 16px;">Thank you for RSVPing to <strong style="color: #2563eb;">{event.title}</strong>.</p>
+            <p style="font-size: 16px;">Thank you for your RSVP to <strong style="color: #2563eb;">{event.title}</strong>.</p>
             
             <p style="font-size: 15px; margin: 10px 0;">
                 <b>Date:</b> {event.start_datetime}<br>
@@ -81,7 +82,7 @@ def create_rsvp(rsvp: schemas.RsvpCreate, db: Session = Depends(get_db)):
             
             <hr style="border: none; height: 1px; background-color: #ddd; margin: 20px 0;">
             
-            <p style="font-size: 15px;">We look forward to seeing you!</p>
+            <p style="font-size: 15px;">{message}</p>
             </td>
         </tr>
         <tr>
@@ -94,13 +95,12 @@ def create_rsvp(rsvp: schemas.RsvpCreate, db: Session = Depends(get_db)):
     </html>
     """
 
-
-    # Save to file
     filename = f"emails/{rsvp.email.replace('@', '_at_')}_{event.id}.html"
     with open(filename, "w") as f:
         f.write(email_content)
 
     return new_rsvp
+
 
 # @app.get("/events")
 # def get_events():
